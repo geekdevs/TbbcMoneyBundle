@@ -17,6 +17,7 @@ before_install:
   - composer self-update
   - mv composer.json composer.json.bck
   - sed 's/${env:SYMFONY_VERSION}/'$SYMFONY_VERSION'/g' composer-template.json > composer.json #replace composer dependencies with actual symfony version
+  - cat composer.json
 
 install:
   - composer update --prefer-dist --no-interaction
@@ -24,7 +25,7 @@ install:
 after_install:
   - mv composer.json.bck composer.json
 
-script: ./vendor/bin/phpunit
+script: ./vendor/bin/phpunit --coverage-text
 
 matrix:
   exclude:
