@@ -13,6 +13,9 @@ env:
   - SYMFONY_VERSION=2.8.* #php >=5.3.9
   - SYMFONY_VERSION=3.0.* #php >=5.5.9
 
+install:
+   - composer require symfony/framework-bundle:${SYMFONY_VERSION}
+
 before_script:
   - composer self-update
   - composer install --dev --prefer-source
