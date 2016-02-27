@@ -13,12 +13,16 @@ env:
   - SYMFONY_VERSION=2.8.* #php >=5.3.9
   - SYMFONY_VERSION=3.0.* #php >=5.5.9
 
-install:
-   - composer require symfony/framework-bundle:${SYMFONY_VERSION}
-
-before_script:
+before_install:
   - composer self-update
-  - composer install --dev --prefer-source
+  - mv composer.json composer.json.bck
+  - sed 's/${env:SYMFONY_VERSION}/'$SYMFONY_VERSION'/g' composer-template.json > composer.json #replace composer dependencies with actual symfony version
+
+install:
+  - composer update --prefer-dist --no-interaction
+
+after_install:
+  - mv composer.json.bck composer.json
 
 script: ./vendor/bin/phpunit
 
