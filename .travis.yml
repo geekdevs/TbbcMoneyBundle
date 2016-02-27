@@ -25,7 +25,7 @@ install:
 after_install:
   - mv composer.json.bck composer.json
 
-script: ./vendor/bin/phpunit --coverage-text
+script: phpunit --coverage-text
 
 matrix:
   exclude:
